@@ -1,0 +1,77 @@
+import os
+import pygame
+from math import sin, radians, degrees, copysign, pi
+from pygame.math import Vector2
+
+#class Vehicule:
+
+class World:
+    def __init__(self):
+        pygame.init()
+        pygame.display.set_caption("Simulateur vehicule autonome")
+        WIDTH_SCREEN = 1550
+        HEIGHT_SCREEN = 1000
+        self.screen = pygame.display.set_mode((WIDTH_SCREEN, HEIGHT_SCREEN))
+        self.clock = pygame.time.Clock()
+        self.ticks = 60
+        self.exit = False
+
+        background = pygame.image.load("fond.jpg").convert_alpha()
+        self.screen.blit(background,(-22, -22))
+
+        # Initilisation des couleurs
+        WHITE = pygame.Color(255, 255, 255)
+        RED = pygame.Color(255, 0, 0)
+        BLUE = pygame.Color(0, 0, 100)
+        GREEN = pygame.Color(0, 125, 0)
+        BLACK = pygame.Color(0, 0, 0)
+
+        # Initialisation des elements de notre environnement
+
+        # Initialisation taille de nos elements
+        LENGHT_ROAD_H = WIDTH_SCREEN
+        LENGHT_ROAD_V = HEIGHT_SCREEN
+        WIDHT_ROAD = 200
+
+        WIDTH_BUILDING = 250
+        HEIGHT_BUILDING = 200
+
+        WIDHT_SIDEWALK = 60
+        HEIGHT_SIDEWALK = 20
+
+        # Route, a partir de draw.rect(notre_fenetre, notre_couleur, (x, y, longueur, largeur))
+        road_1 = pygame.draw.rect(self.screen, WHITE, (0, 0, LENGHT_ROAD_H, WIDHT_ROAD))
+        road_2 = pygame.draw.rect(self.screen, WHITE, (0, 400, LENGHT_ROAD_H, WIDHT_ROAD))
+        road_3 = pygame.draw.rect(self.screen, WHITE, (0, 800, LENGHT_ROAD_H, WIDHT_ROAD))
+        road_4 = pygame.draw.rect(self.screen, WHITE, (0, 0, WIDHT_ROAD, LENGHT_ROAD_V))
+        road_5 = pygame.draw.rect(self.screen, WHITE, (450, 0, WIDHT_ROAD, LENGHT_ROAD_V))
+        road_6 = pygame.draw.rect(self.screen, WHITE, (900, 0, WIDHT_ROAD, LENGHT_ROAD_V))
+        road_7 = pygame.draw.rect(self.screen, WHITE, (1350, 0, WIDHT_ROAD, LENGHT_ROAD_V))
+
+        # Immeuble
+        building_1 = pygame.draw.rect(self.screen, BLACK, (WIDHT_ROAD, WIDHT_ROAD, WIDTH_BUILDING, HEIGHT_BUILDING))
+        building_2 = pygame.draw.rect(self.screen, BLACK, (2*WIDHT_ROAD+WIDTH_BUILDING, WIDHT_ROAD, WIDTH_BUILDING, HEIGHT_BUILDING))
+        building_3 = pygame.draw.rect(self.screen, BLACK, (3*WIDHT_ROAD+2*WIDTH_BUILDING, WIDHT_ROAD, WIDTH_BUILDING, HEIGHT_BUILDING))
+        building_4 = pygame.draw.rect(self.screen, BLACK, (WIDHT_ROAD, 2*WIDHT_ROAD+HEIGHT_BUILDING, WIDTH_BUILDING, HEIGHT_BUILDING))
+        building_5 = pygame.draw.rect(self.screen, BLACK, (2*WIDHT_ROAD+WIDTH_BUILDING, 2*WIDHT_ROAD+HEIGHT_BUILDING, WIDTH_BUILDING, HEIGHT_BUILDING))
+        # parc
+        building_6 = pygame.draw.rect(self.screen, GREEN, (3*WIDHT_ROAD+2*WIDTH_BUILDING, 2*WIDHT_ROAD+HEIGHT_BUILDING, WIDTH_BUILDING, HEIGHT_BUILDING))
+
+        # passage pieton
+        # side_walk_1
+        pygame.draw.rect(self.screen, BLUE, (WIDHT_ROAD+WIDTH_BUILDING+40, WIDHT_ROAD, HEIGHT_SIDEWALK, WIDHT_SIDEWALK))
+        pygame.draw.rect(self.screen, BLUE, (WIDHT_ROAD+WIDTH_BUILDING+100, WIDHT_ROAD, HEIGHT_SIDEWALK, WIDHT_SIDEWALK))
+        pygame.draw.rect(self.screen, BLUE, (WIDHT_ROAD+WIDTH_BUILDING+160, WIDHT_ROAD, HEIGHT_SIDEWALK, WIDHT_SIDEWALK))
+
+        # side_walk_2
+        pygame.draw.rect(self.screen, BLUE, (WIDHT_ROAD+WIDTH_BUILDING+40, 2*WIDHT_ROAD+HEIGHT_BUILDING, HEIGHT_SIDEWALK, WIDHT_SIDEWALK))
+        pygame.draw.rect(self.screen, BLUE, (WIDHT_ROAD+WIDTH_BUILDING+100, 2*WIDHT_ROAD+HEIGHT_BUILDING, HEIGHT_SIDEWALK, WIDHT_SIDEWALK))
+        pygame.draw.rect(self.screen, BLUE, (WIDHT_ROAD+WIDTH_BUILDING+160, 2*WIDHT_ROAD+HEIGHT_BUILDING, HEIGHT_SIDEWALK, WIDHT_SIDEWALK))
+
+        # side_walk_3
+        pygame.draw.rect(self.screen, BLUE, (2*WIDHT_ROAD+WIDTH_BUILDING, WIDHT_ROAD+HEIGHT_BUILDING+40, WIDHT_SIDEWALK, HEIGHT_SIDEWALK))
+        pygame.draw.rect(self.screen, BLUE, (2*WIDHT_ROAD+WIDTH_BUILDING, WIDHT_ROAD+HEIGHT_BUILDING+100, WIDHT_SIDEWALK, HEIGHT_SIDEWALK))
+        pygame.draw.rect(self.screen, BLUE, (2*WIDHT_ROAD+WIDTH_BUILDING, WIDHT_ROAD+HEIGHT_BUILDING+160, WIDHT_SIDEWALK, HEIGHT_SIDEWALK))
+
+        # side_walk_3
+        pygame.draw.r
